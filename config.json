@@ -22,7 +22,7 @@
             ">>="
         ],
         "Lua.runtime.builtin": {
-            "basic": "disable",
+            "basic": "enable",
             "bit": "disable",
             "bit32": "disable",
             "builtin": "disable",
