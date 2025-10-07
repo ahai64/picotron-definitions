@@ -34,7 +34,7 @@
             "math": "disable",
             "os": "disable",
             "package": "disable",
-            "string": "disable",
+            "string": "enable",
             "table": "disable",
             "table.clear": "disable",
             "table.new": "disable",
