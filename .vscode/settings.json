@@ -29,7 +29,7 @@
         "ffi": "disable",
         "io": "disable",
         "jit": "disable",
-        "math": "disable",
+        "math": "enable",
         "os": "disable",
         "package": "disable",
         "string": "enable",
