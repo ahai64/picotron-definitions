@@ -3,7 +3,6 @@
     "Lua.workspace.checkThirdParty": false,
     "Lua.diagnostics.disable": [
         "lowercase-global",
-        "undefined-doc-name",
         "err-esc"
     ],
     "Lua.runtime.nonstandardSymbol": [
@@ -23,7 +22,7 @@
         "basic": "enable",
         "bit": "disable",
         "bit32": "disable",
-        "builtin": "disable",
+        "builtin": "enable",
         "coroutine": "disable",
         "debug": "disable",
         "ffi": "disable",
