@@ -23,8 +23,8 @@
         "bit": "disable",
         "bit32": "disable",
         "builtin": "enable",
-        "coroutine": "disable",
-        "debug": "disable",
+        "coroutine": "enable",
+        "debug": "enable",
         "ffi": "disable",
         "io": "disable",
         "jit": "disable",
@@ -32,9 +32,9 @@
         "os": "disable",
         "package": "disable",
         "string": "enable",
-        "table": "disable",
+        "table": "enable",
         "table.clear": "disable",
         "table.new": "disable",
-        "utf8": "disable"
+        "utf8": "enable"
     }
 }
