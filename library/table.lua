@@ -13,29 +13,39 @@
 ---@param index number?
 function add(tbl, val, index) end
 
----Delete the first instance of value VAL in table TBL. The remaining entries are shifted left one index to avoid holes.
+---Delete the first instance of value VAL in table TBL.
+---
+---The remaining entries are shifted left one index to avoid holes.
 ---
 ---Note that val is the value of the item to be deleted, not the index into the table.
+---
+---(To remove an item at a particular index, use deli() instead).
+---
+---del() returns the deleted item, or returns no value when nothing was deleted.
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#del)
 ---@param tbl table
 ---@param val any
----@return any -- returns the deleted item, or returns no value when nothing was deleted.
+---@return any
 function del(tbl, val) end
 
----Like del(), but remove the item from table tbl at index. When index is not given, the last element of the table is removed and returned.
+---Like del(), but remove the item from table tbl at index.
+---
+---When index is not given, the last element of the table is removed and returned.
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#deli)
 ---@param tbl table
 ---@param index number?
----@return any -- returns the deleted item, or returns no value when nothing was deleted.
+---@return any
 function deli(tbl, index) end
 
----Returns the length of table t (same as #tbl) When val is given, returns the number of instances of VAL in that table.
+---Returns the length of table t (same as #tbl).
+---
+---When val is given, returns the number of instances of VAL in that table.
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#count)
 ---@param tbl table
----@param val any
+---@param val any?
 ---@return number
 function count(tbl, val) end
 

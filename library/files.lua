@@ -14,19 +14,29 @@ function store(filename, obj, metadata) end
 
 ---Return a lua object stored in a given file. Returns the object and metadata.
 ---
+---options is a table with fields for http requests
+---
+---- on_complete: a function that is called when the fetch is complete (means that fetch is not blocking)
+---- method: can be "get", "post", "put" (defaults to "get")
+---- headers: a table of strings send as headers
+---- body: the body of the request
+---- raw_str: when true, the raw contents of the host file is returned as a string
+---- argb: when true, png files are returned as "u32" userdata of argb pixel values
+---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#fetch)
 ---@param filename string
+---@param options table?
 ---@return any,metadata
-function fetch(filename) end
+function fetch(filename, options) end
 
----Store and fetch just the metadata fork of a file or directory. This can be faster in some cases.
+---Store just the metadata fork of a file or directory. This can be faster in some cases.
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#store_metadata)
 ---@param filename string
 ---@param metadata metadata
 function store_metadata(filename, metadata) end
 
----Store and fetch just the metadata fork of a file or directory. This can be faster in some cases.
+---Fetch just the metadata fork of a file or directory. This can be faster in some cases.
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#fetch_metadata)
 ---@param filename string
@@ -66,7 +76,9 @@ function mv(src, dest) end
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#rm)
 function rm(filename) end
 
----Return the present working directory. Relative filenames (that do not start with "/") all resolve relative to this path.
+---Return the present working directory.
+---
+---Relative filenames (that do not start with "/") all resolve relative to this path.
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#pwd)
 function pwd() end
@@ -82,6 +94,9 @@ function cd() end
 function fullpath(filename) end
 
 ---returns 3 attributes of given filename (if it exists)
+---- string: "file" or "folder"
+---- number: size of file
+---- string: origin of path
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#fstat)
 ---@param filename any
@@ -90,7 +105,32 @@ function fstat(filename) end
 
 ---Load and run a lua file.
 ---
+---The filename is relative to the present working directory, not the directory that the file was included from.
+---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#include)
 ---@param filename string
 ---@return any
 function include(filename) end
+
+---@class Location: string
+local Location = {}
+
+---Return the path (without the spot).
+---@return string
+function Location:path() end
+
+---Returns just the spot of a location.
+---@return string
+function Location:spot() end
+
+---Return the protocol of a location, or nil if it is a local path.
+---@return string|nil
+function Location:port() end
+
+---Returns the path of the directory the file is inside.
+---@return string
+function Location:dirname() end
+
+---Returns the file or directory name with its containing directory path and locus omitted.
+---@return string
+function Location:basename() end

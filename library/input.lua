@@ -1,6 +1,6 @@
 ---@meta
 
----Returns the state of button b for player index pl
+---Returns the state of button b for player index pl  (default 0 -- means Player 1)
 ---```
 ---0 1 2 3     LEFT RIGHT UP DOWN
 ---4 5         Buttons: O X
@@ -28,7 +28,9 @@ function btnp(b, pl) end
 
 ---returns the state of key k
 ---
----key() uses the local keyboard layout by default. To get the raw layout, use true as the second parameter to indicate that k should be the name of the raw scancode.
+---key() uses the local keyboard layout by default.
+---
+---To get the raw layout, use true as the second parameter to indicate that k should be the name of the raw scancode.
 ---
 ---key() with no parameters return true when any key is pressed.
 ---
@@ -40,7 +42,9 @@ function key(k, raw) end
 
 ---keyp() has the same behaviour key(), but true when the key is pressed or repeating.
 ---
----keyp() uses the local keyboard layout by default. To get the raw layout, use true as the second parameter to indicate that k should be the name of the raw scancode.
+---keyp() uses the local keyboard layout by default.
+---
+---To get the raw layout, use true as the second parameter to indicate that k should be the name of the raw scancode.
 ---
 ---keyp() with no parameters return true when any key is pressed.
 ---
@@ -81,6 +85,8 @@ function peektext() end
 ---@return string
 function readtext(clear) end
 
+---Returns mouse_x, mouse_y, mouse_b, wheel_x, wheel_y
+---
 ---mouse_b is a bitfield: 0x1 means left mouse button, 0x2 right mouse button
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#mouse)
@@ -106,6 +112,6 @@ function mouselock(lock, event_sensitivity, move_sensitivity) end
 ---- 0x4 do not block -- return nil when there is no response that frame
 ---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#input)
----@param prompt string|number?
+---@param prompt string
 ---@param flags number?
 function input(prompt, flags) end

@@ -2,6 +2,20 @@
 
 ---Play sfx n (0..63) on channel (0..15) from note offset (0..63 in notes) for length notes.
 ---
+---When n is a negative number, a special sfx channel command is issued [view online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#special_sfx_channel_commands_).
+---
+---Giving nil or -1 as the channel index automatically chooses a channel that is not being used.
+---
+---Negative offsets can be used to delay before playing.
+---
+---When the sfx is looping, length still means the number of (posisbly repeated) notes to play.
+---
+---When mix_volume is given, the channel is mixed at that value (0x40 means 1.0).
+---
+---Otherwise the value at 0x553a is used (0x40 by default).
+---
+---In addition to the per-channel mix volume, all channels are subject to a per-process global volume specified at 0x5538 (default: 0x40 == 1.0).
+---
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#sfx)
 ---@param n number -- 0~63
 ---@param channel number? -- 0~15
@@ -9,16 +23,41 @@
 ---@param length number?
 function sfx(n, channel, offset, length) end
 
----Play music starting from pattern n. -1 to stop music
+---Play music starting from pattern n.
 ---
+---n = -1 to stop music
+---
+---fade_len is in ms (default: 0). so to fade pattern 0 in over 1 second: `music(0, 1000)`
+---
+---channel_mask is bitfield that specifies which channels to reserve for music only, low bits first.
+---
+---For example, to play only on the first three channels 0..2, the lowest three bits should be set:
+---```
+---music(0, nil, 0x7) -- bits: 0x1 | 0x2 | 0x4
+---```
+---Reserved channels can still be used to play sound effects on, but only when that channel index is explicitly requested by sfx().
+---
+---When music channels are mixed, they are subject to a global per-app volume specified at 0x5538 (default: 0x40 == 1.0), which is then multiplied by a global music volume at 0x5539 (default: 0x40 == 1.0).
+---
+---tick_offset is an optional offset to start playing from. This is given in ticks rather than rows, because it supports patterns with tricks that play back at different speeds. To start from row 2 of a track that has spd 16, use:
+---```
+---music(0, nil, nil, nil, 2 * 16)
+---```
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#music)
 ---@param n number
----@param fade_len number? default 0, in ms
+---@param fade_len number?
 ---@param channel_mask number?
 function music(n, fade_len, channel_mask) end
 
----This provides low level control over the state of a channel. It is useful in more niche situations, like audio authoring tools and size-coding.
+---This provides low level control over the state of a channel.
 ---
+---It is useful in more niche situations, like audio authoring tools and size-coding.
+---
+---Internally this is what is used to play each row of a sfx when one is active.
+---
+---Use 0xff to indicate an attribute should not be altered.
+---
+---To kill all channels (including leftover echo and decay envelopes): `note() -- same as sfx(-2, -1)`
 ---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#note)
 ---@param pitch number? -- channel pitch (default 48 -- middle C)
 ---@param inst number? -- instrument index (default 0)

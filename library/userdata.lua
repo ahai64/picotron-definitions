@@ -1,8 +1,23 @@
 ---@meta
 
---------------------------------------------------------------------------------
--- Userdata
---------------------------------------------------------------------------------
+---Userdata in Picotron is a fixed-size allocation of memory that can be manipulated as a 1d or 2d array of typed data.
+---
+---It is used to repesent many things in Picotron: vectors, matrices, to store sprites, maps and the contents of display.
+---
+---Therefore, all of these things can be manipulated with the userdata API.
+---
+---It is also possible to expose the raw binary contents of a userdata to RAM (by giving it an address with memmap), in which case userdata API can be used to directly manipulate the contents of RAM.
+---
+---[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#Userdata)
+---@class Userdata
+---@field x number the 1st element of a userdata
+---@field y number the 2nd element of a userdata
+---@field z number the 3rd element of a userdata
+---@field u number the 4th element of a userdata
+---@field v number the 5th element of a userdata
+---@field w number the 6th element of a userdata
+---@field t number the 7th element of a userdata
+local Userdata = {}
 
 ---Create a userdata with a data type
 ---
@@ -20,19 +35,6 @@ function userdata(data_type, width, height, data) end
 ---@param ... number
 ---@return Userdata
 function vec(...) end
-
----Userdata in Picotron is a fixed-size allocation of memory that can be manipulated as a 1d or 2d array of typed data. It is used to repesent many things in Picotron: vectors, matrices, to store sprites, maps and the contents of display. Therefore, all of these things can be manipulated with the userdata API. It is also possible to expose the raw binary contents of a userdata to RAM (by giving it an address with memmap), in which case userdata API can be used to directly manipulate the contents of RAM.
----
----[View Online](https://www.lexaloffle.com/dl/docs/picotron_manual.html#Userdata)
----@class Userdata
----@field x number the 1st element of a userdata
----@field y number the 2nd element of a userdata
----@field z number the 3rd element of a userdata
----@field u number the 4th element of a userdata
----@field v number the 5th element of a userdata
----@field w number the 6th element of a userdata
----@field t number the 7th element of a userdata
-local Userdata = {}
 
 ---Return the width of the userdata
 ---
